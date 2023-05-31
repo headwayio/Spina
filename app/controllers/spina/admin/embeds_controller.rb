@@ -2,7 +2,10 @@ module Spina
   module Admin
     class EmbedsController < AdminController
       def new
-        @embeddable = (Spina::Embeds.constantize(embed_type) || embeddables.first).new
+        klass = Spina::Embeds.constantize(embed_type) || embeddables.first
+        raise_missing_embed_error! if klass.nil?
+
+        @embeddable = klass.new
       end
 
       def create
@@ -28,6 +31,10 @@ module Spina
 
       def embed_params
         params.require(:embeddable).permit!
+      end
+
+      def raise_missing_embed_error!
+        raise ArgumentError, t('spina.embeds.not_found', embed_type:)
       end
     end
   end

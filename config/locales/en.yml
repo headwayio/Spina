@@ -142,6 +142,7 @@ en:
     embeds:
       embed_a_component: Embed a component
       embed_component: Embed component
+      not_found: Unable to find the Spina Embed class named %{embed_type}. Please check your theme's "embeds" array to make sure each entry is spelled correctly and that you have a Ruby class present in "app/models/spina/embeds/".
     forgot_password:
       expired: Your password reset token has expired
       mail_subject: Reset your password
